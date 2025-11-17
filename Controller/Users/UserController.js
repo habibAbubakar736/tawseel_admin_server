@@ -180,3 +180,25 @@ exports.GetCustomers = async (req, res) => {
         return res.json({ success: false, message: "Internal server error", error });
     }
 }
+
+
+
+/////////////////// update fcm token /////////////////// 
+exports.UpdateFcmToken = async (req, res) => {
+    try {
+
+        const { user_id, fcm_token } = req.body;
+
+        if (!user_id || !fcm_token) {
+            return res.json({ success: false, message: "User Id and fcm token is requested", })
+        }
+
+        let query = `UPDATE users SET fcm_token = ? WHERE user_id = ?`;
+        await pool.query(query, [fcm_token, user_id])
+        return res.status(200).json({ success: true, message: 'Fcm Token has been updated successfully ..!' });
+
+    } catch (error) {
+        console.log("update fcm_token error : ", error);
+        return res.json({ success: false, message: "Internal server error", error });
+    }
+}

@@ -9,6 +9,7 @@ const AuthMiddleware = require("../Middleware/AuthMiddleware")
 /////////////////////////////// USER 'S ROUTING ///////////////////////////////
 const UserController = require("../Controller/Users/UserController");
 router.post("/Login", UserController.Login);
+router.post("/UpdateFcmToken", UserController.UpdateFcmToken);
 
 router.post("/CreateUser", AuthMiddleware.AdminAuth, UserController.CreateUser);
 router.get("/GetUsers", AuthMiddleware.AdminAuth, UserController.GetUsers);
